@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meridian — Voyages d'exception</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ============ NAVIGATION ============ -->
+  <header class="navbar">
+    <a href="#hero" class="navbar__logo">
+      <span class="navbar__stamp">M</span>
+      Meridian
+    </a>
+    <nav class="navbar__nav">
+      <ul class="navbar__links">
+        <li><a href="#destinations">Destinations</a></li>
+        <li><a href="#testimonials">Voyageurs</a></li>
+        <li><a href="#gallery">Galerie</a></li>
+        <li><a href="#footer">Contact</a></li>
+      </ul>
+    </nav>
+    <a href="#destinations" class="navbar__cta">Réserver</a>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="hero">
+    <div class="hero__overlay"></div>
+    <div class="hero__content">
+      <span class="hero__eyebrow">Voyages sur mesure depuis 2015</span>
+      <h1 class="hero__title">Le monde mérite <br> d'être vu lentement.</h1>
+      <p class="hero__subtitle">Des itinéraires pensés dans les moindres détails, vers les endroits que vous n'oublierez jamais.</p>
+      <a href="#destinations" class="hero__cta">On part où ?</a>
+    </div>
+    <div class="hero__stamp" aria-hidden="true">
+      <svg viewBox="0 0 120 120" class="hero__stamp-svg">
+        <circle cx="60" cy="60" r="56" />
+        <path id="stampCircle" d="M 60,60 m -42,0 a 42,42 0 1,1 84,0 a 42,42 0 1,1 -84,0" fill="none"/>
+        <text>
+          <textPath href="#stampCircle">MERIDIAN TRAVEL · EST. 2015 · MERIDIAN TRAVEL ·</textPath>
+        </text>
+      </svg>
+    </div>
+    <a href="#destinations" class="hero__scroll" aria-label="Défiler vers le bas">↓</a>
+  </section>
+
+  <!-- ============ DESTINATIONS ============ -->
+  <section class="destinations" id="destinations">
+    <div class="section__header">
+      <span class="section__eyebrow">Sélection Meridian</span>
+      <h2 class="section__title">Destinations populaires</h2>
+      <p class="section__text">Quatre invitations au départ, choisies pour leur lumière, leur silence ou leur démesure.</p>
+    </div>
+
+    <div class="destinations__grid">
+
+      <article class="destination-card">
+        <div class="destination-card__image" style="background-image: url('https://images.unsplash.com/photo-1533105079780-92b9be482077?w=800');">
+          <span class="destination-card__tag">Coup de cœur</span>
+        </div>
+        <div class="destination-card__content">
+          <h3 class="destination-card__title">Santorin, Grèce</h3>
+          <p class="destination-card__location">Cyclades</p>
+          <p class="destination-card__desc">Des maisons blanches suspendues de la mer Égée.</p>
+          <div class="destination-card__footer">
+            <span class="destination-card__price">Dès 1 290 €</span>
+            <a href="#" class="destination-card__link">Découvrir →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="destination-card">
+        <div class="destination-card__image" style="background-image: url('https://images.unsplash.com/photo-1512100356356-de1b84283e18?w=800');">
+          <span class="destination-card__tag">Nouveau</span>
+        </div>
+        <div class="destination-card__content">
+          <h3 class="destination-card__title">Kyoto, Japon</h3>
+          <p class="destination-card__location">Kansai</p>
+          <p class="destination-card__desc">Temples silencieux et forêts de bambous à perte de vue.</p>
+          <div class="destination-card__footer">
+            <span class="destination-card__price">Dès 1 890 €</span>
+            <a href="#" class="destination-card__link">Découvrir →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="destination-card">
+        <div class="destination-card__image" style="background-image: url('https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?w=800');">
+          <span class="destination-card__tag">Populaire</span>
+        </div>
+        <div class="destination-card__content">
+          <h3 class="destination-card__title">Marrakech, Maroc</h3>
+          <p class="destination-card__location">Marrakech-Safi</p>
+          <p class="destination-card__desc">Riads secrets, souks animés et couchers de soleil ocre.</p>
+          <div class="destination-card__footer">
+            <span class="destination-card__price">Dès 990 €</span>
+            <a href="#" class="destination-card__link">Découvrir →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="destination-card">
+        <div class="destination-card__image" style="background-image: url('https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=800');">
+          <span class="destination-card__tag">Exclusif</span>
+        </div>
+        <div class="destination-card__content">
+          <h3 class="destination-card__title">Bora Bora, Polynésie</h3>
+          <p class="destination-card__location">Océan Pacifique</p>
+          <p class="destination-card__desc">Bungalows sur pilotis et lagons turquoise sans fin.</p>
+          <div class="destination-card__footer">
+            <span class="destination-card__price">Dès 2 490 €</span>
+            <a href="#" class="destination-card__link">Découvrir →</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ============ TÉMOIGNAGES ============ -->
+  <section class="testimonials" id="testimonials">
+    <div class="section__header section__header--light">
+      <span class="section__eyebrow">Ils sont partis avec nous</span>
+      <h2 class="section__title">Ce qu'en disent nos voyageurs</h2>
+    </div>
+
+    <div class="testimonials__grid">
+
+      <blockquote class="testimonial-card">
+        <p class="testimonial-card__quote">« Un voyage organisé au millimètre, sans jamais perdre son âme. On s'est sentis accompagnés, jamais encadrés. »</p>
+        <footer class="testimonial-card__author">
+          <img class="testimonial-card__avatar" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100" alt="Portrait de Camille D.">
+          <div>
+            <p class="testimonial-card__name">Camille D.</p>
+            <p class="testimonial-card__role">Séjour à Kyoto</p>
+          </div>
+        </footer>
+      </blockquote>
+
+      <blockquote class="testimonial-card">
+        <p class="testimonial-card__quote">« La logistique était invisible, tout simplement parfaite. On a juste eu à profiter. »</p>
+        <footer class="testimonial-card__author">
+          <img class="testimonial-card__avatar" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100" alt="Portrait de Marc L.">
+          <div>
+            <p class="testimonial-card__name">Marc L.</p>
+            <p class="testimonial-card__role">Séjour à Santorin</p>
+          </div>
+        </footer>
+      </blockquote>
+
+      <blockquote class="testimonial-card">
+        <p class="testimonial-card__quote">« Meridian a trouvé des adresses qu'on n'aurait jamais dénichées seuls. Une équipe qui connaît vraiment le terrain. »</p>
+        <footer class="testimonial-card__author">
+          <img class="testimonial-card__avatar" src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=100" alt="Portrait de Sarah K.">
+          <div>
+            <p class="testimonial-card__name">Sarah K.</p>
+            <p class="testimonial-card__role">Séjour à Marrakech</p>
+          </div>
+        </footer>
+      </blockquote>
+
+    </div>
+  </section>
+
+  <!-- ============ GALERIE ============ -->
+  <section class="gallery" id="gallery">
+    <div class="section__header">
+      <span class="section__eyebrow">Instants volés</span>
+      <h2 class="section__title">La galerie Meridian</h2>
+    </div>
+
+    <div class="gallery__grid">
+      <div class="gallery__item gallery__item--big">
+        <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=1000" alt="Montagnes au lever du soleil">
+      </div>
+      <div class="gallery__item">
+        <img src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?w=600" alt="Plage tropicale">
+      </div>
+      <div class="gallery__item">
+        <img src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=600" alt="Ruelle typique">
+      </div>
+      <div class="gallery__item">
+        <img src="https://images.unsplash.com/photo-1504609773096-104ff2c73ba4?w=600" alt="Temple asiatique">
+      </div>
+      <div class="gallery__item gallery__item--tall">
+        <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=700" alt="Rue de Marrakech">
+      </div>
+      <div class="gallery__item">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600" alt="Lagon turquoise">
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer" id="footer">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <p class="footer__logo">Meridian</p>
+        <p class="footer__tagline">Des voyages qui restent.</p>
+      </div>
+      <form class="footer__newsletter">
+        <label for="newsletter-email" class="footer__newsletter-label">Envie de partir ?</label>
+        <div class="footer__newsletter-row">
+          <input type="email" id="newsletter-email" placeholder="Votre adresse email">
+          <button type="submit">S'inscrire</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="footer__columns">
+      <div class="footer__col">
+        <h4>Destinations</h4>
+        <ul>
+          <li><a href="#">Santorin</a></li>
+          <li><a href="#">Kyoto</a></li>
+          <li><a href="#">Marrakech</a></li>
+          <li><a href="#">Bora Bora</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Meridian</h4>
+        <ul>
+          <li><a href="#">Notre histoire</a></li>
+          <li><a href="#">Nos guides</a></li>
+          <li><a href="#">Carrières</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Assurance voyage</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Suivez-nous</h4>
+        <ul>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">Pinterest</a></li>
+          <li><a href="#">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p>© 2026 Meridian Travel. Tous droits réservés.</p>
+      <div class="footer__legal">
+        <a href="#">Mentions légales</a>
+        <a href="#">Confidentialité</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

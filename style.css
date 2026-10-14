@@ -1,0 +1,915 @@
+/* ============================================================
+   MERIDIAN — VERSION ÉTUDIANT
+   ------------------------------------------------------------
+   Tous les sélecteurs sont déjà écrits. Ton travail : compléter
+   les propriétés CSS à l'intérieur de chaque bloc, en suivant
+   les commentaires qui te guident.
+
+   Avant de commencer, déclare ta palette et tes polices ici,
+   dans :root, sous forme de variables CSS (--nom-variable).
+   Tu les réutiliseras ensuite partout avec var(--nom-variable)
+   au lieu de répéter les mêmes couleurs/tailles partout.
+
+   Palette suggérée (thème voyage haut de gamme) :
+     - une couleur "encre" très sombre (texte / fonds foncés)
+     - une couleur "sable" ou "crème" claire (fonds)
+     - une couleur "corail" ou similaire, vive, pour les CTA
+     - une couleur "or" / dorée pour les petits accents
+   ============================================================ */
+
+:root {
+  /* Déclare ici tes variables de couleurs, ex : --ink: ... ; */
+  --ink: #10242e;
+  --teal: #1f4e4a;
+  --sand: #f3ecde;
+  --cream: #fbf8f2;
+  --coral: #e2725b;
+  --gold: #c6a15b;
+
+  --font-display: "Fraunces", serif;
+  --font-text: "Inter", sans-serif;
+
+  --radius-sm: 6px;
+  --radius-md: 14px;
+  --radius-lg: 28px;
+
+  --shadow-soft: 0 20px 40px -20px rgba(16, 36, 46, 0.25);
+  --shadow-card: 0 10px 30px -12px rgba(16, 36, 46, 0.2);
+
+  --transition-base: 0.3s ease;
+  /* Déclare ici tes variables de polices (Google Fonts importées
+     dans le <head> du HTML : Fraunces + Inter) */
+
+  /* Tu peux aussi déclarer des variables de rayon de bordure et
+     d'ombre, pour rester cohérent dans tout le fichier */
+}
+
+/* --- Reset minimal --- */
+* {
+  /* Neutralise les marges/paddings par défaut du navigateur */
+margin: 0;
+padding: 0;
+  /* Force box-sizing: border-box sur tous les éléments */
+  box-sizing: border-box;
+}
+
+body {
+  /* Applique ta police de texte principale */
+font-family: var(--font-text);
+  /* Applique ta couleur de texte principale */
+color: var(--ink);
+  /* Applique une couleur de fond de page */
+background-color: var(--cream);
+  /* Ajoute un interlignage confortable (line-height) */
+  line-height: 1.6;
+}
+
+a {
+  /* Retire le soulignement par défaut des liens */
+text-decoration: none;
+  /* Fais en sorte que les liens héritent de la couleur du texte parent */
+  color: inherit;
+}
+
+ul {
+  /* Retire les puces par défaut des listes */
+  list-style:none; 
+}
+
+img {
+  /* Empêche une image de dépasser la largeur de son conteneur */
+  max-width: 100%;
+
+  /* Passe l'image en display: block pour éviter l'espace fantôme sous l'image */
+  display: block;
+}
+
+/* ============================================================
+   NAVIGATION
+   Objectif : une barre fixée en haut de l'écran, avec le logo à
+   gauche, les liens au centre/à droite et un bouton CTA.
+   ============================================================ */
+.navbar {
+  /* Fixe la barre en haut de l'écran (position + top + left + width) */
+position: fixed;
+top: 0;
+width: 100%;
+left: 0;
+  /* Utilise Flexbox pour aligner logo / liens / CTA sur une ligne */
+display: flex;
+  /* Espace les 3 blocs uniformément (justify-content) */
+justify-content: space-between;
+  /* Centre les éléments verticalement (align-items) */
+align-items:center;
+  /* Ajoute un padding confortable en haut/bas et à gauche/droite */
+padding: 10px;
+  /* Bonus : fond légèrement transparent + effet de flou (backdrop-filter)
+     pour un rendu "verre dépoli" moderne */
+background: var(--cream);
+backdrop-filter: blur(10px);
+  /* Ajoute une fine bordure basse pour séparer la navbar du contenu */
+border-bottom: 1px solid #e0e0e0;
+  /* N'oublie pas un z-index élevé pour rester au-dessus du hero */
+  z-index: 100;
+}
+
+.navbar__logo {
+  /* Aligne le petit rond (logo) et le texte "Meridian" avec Flexbox */
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: center;
+gap: 5px;
+  /* Choisis la police display, une taille et un poids de texte marqués */
+font-family: 'Times New Roman', Times, serif;
+font-size: 20px;
+font-weight: bold;
+}
+
+.navbar__stamp {
+  /* Transforme ce petit élément en cercle plein (width = height + border-radius) */
+width: 28px;
+height: 28px;
+border-radius: 50%;
+  /* Centre le "M" à l'intérieur du cercle avec Flexbox */
+display: flex;
+justify-content: center;
+align-items: center;
+  /* Donne-lui une couleur de fond vive (ton accent corail) et un texte clair */
+background-color: #e2725b;
+color: #e0e0e0;
+}
+
+.navbar__links {
+  /* Aligne les liens sur une ligne avec un espacement régulier (Flexbox + gap) */
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.navbar__links a {
+  /* Prépare une transition douce de couleur pour l'effet hover */
+transition: 0.3s ease;
+  /* position: relative nécessaire pour positionner le ::after ci-dessous */
+position: relative;
+}
+
+.navbar__links a::after {
+  /* Crée une petite barre invisible sous le lien (content, position, width: 0) */
+content: "";
+position: absolute;
+display: block;
+width: 0;
+  /* Donne-lui la couleur de ton accent et une hauteur de 1-2px */
+background-color: #e2725b;
+height: 1.5px;
+  /* Prépare une transition sur la largeur */
+transition: width 0.3s ease;
+left: 0;
+bottom: -4px;
+}
+
+.navbar__links a:hover {
+  /* Change la couleur du texte au survol */
+  color: #e2725b;
+}
+
+.navbar__links a:hover::after {
+  /* Fait grandir la barre jusqu'à 100% de largeur au survol */
+  width: 100%;
+}
+
+.navbar__cta {
+  /* Ajoute un padding généreux et un border-radius élevé pour un effet "pilule" */
+padding: 5px 15px;
+border-radius: 80px;
+  /* Donne une couleur de fond foncée et un texte clair */
+background-color: #10242e;
+color: white;
+  /* Prépare une transition sur background-color et transform */
+  transition: 0.3s ease;
+}
+
+.navbar__cta:hover {
+  /* Change la couleur de fond au survol (ex : vers ton accent corail) */
+background-color: #e2725b;
+  /* Ajoute un léger décalage vers le haut (transform: translateY) */
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   HERO
+   Objectif : une section plein écran avec une image de fond,
+   un titre marquant, un sous-titre et un bouton d'action.
+   ============================================================ */
+.hero {
+  /* position: relative (nécessaire pour positionner l'overlay et le tampon) */
+position: relative;
+  /* Donne-lui une hauteur d'au moins 100vh */
+min-height: 100vh;
+  /* Centre le contenu horizontalement ET verticalement avec Flexbox */
+display: flex;
+justify-content: center;
+  /* Ajoute une image de fond (background-image: url(...)) */
+background-image: url('https://res.klook.com/images/fl_lossy.progressive,q_65/c_fill,w_1295,h_863/w_80,x_15,y_15,g_south_west,l_Klook_water_br_trans_yhcmh3/activities/m1gfouxy8gqoyejrdafq/Excursionpriv%C3%A9edunejourn%C3%A9eaux4%C3%AElesdeKrabienbateautraditionnellocaloudeluxe.jpg');
+  /* Fais en sorte que l'image couvre toute la section sans se déformer
+     (background-size + background-position) */
+background-size: cover;
+background-position: center;
+  /* Cache tout débordement (overflow: hidden), utile pour le tampon animé */
+  overflow: hidden;
+}
+
+.hero__overlay {
+  /* Positionne ce calque pour qu'il recouvre exactement .hero (position + inset: 0) */
+position: absolute;
+inset: 0;
+  /* Ajoute un dégradé sombre semi-transparent par-dessus l'image
+     pour garantir la lisibilité du texte clair */
+background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7));
+}
+
+.hero__content {
+  /* position relative + z-index pour passer au-dessus de l'overlay */
+position: relative;
+z-index: 10;
+  /* Limite la largeur du bloc de texte (max-width) et centre-le */
+max-width: 100%;
+align-items: center;
+justify-content: center;
+  /* Centre le texte (text-align) */
+text-align: center;
+  /* Empile eyebrow / titre / sous-titre / bouton verticalement avec Flexbox
+     (flex-direction: column) et un espacement régulier (gap) */
+display: flex;
+flex-direction: column;
+gap: 10px;  
+/* Ajoute une animation d'apparition douce au chargement de la page */
+animation: fadeInSlideUp 1s ease forwards;
+}
+
+  /* Ajoute une animation d'apparition douce au chargement de la page
+     (@keyframes à créer toi-même : fondu + léger déplacement vers le haut) */
+@keyframes fadeInSlideUp {
+  from {
+opacity: 0;
+transform: translateY(20px);
+  }
+  to {
+opacity: 1;
+transform: translateY(0);
+  }
+}
+
+.hero__eyebrow {
+  /* Petit texte au-dessus du titre : taille réduite, majuscules,
+     lettres espacées (text-transform + letter-spacing) */
+font-size: 11px;
+text-transform: uppercase;
+letter-spacing: 1px;
+  /* Couleur dorée/accent */
+  color: var(--gold);
+}
+
+.hero__title {
+  /* Police display, taille très généreuse et responsive avec clamp() */
+font-family: 'Times New Roman', Times, serif;
+font-size: 50px;
+margin-top: 10px;
+margin-bottom: 10px;
+  /* Réduis l'interlignage pour un gros titre (line-height proche de 1) */
+line-height: 1.1;
+  /* Couleur claire, bien lisible sur l'image de fond */
+  color: #e0e0e0;
+}
+
+.hero__subtitle {
+  /* Taille de texte confortable, couleur claire légèrement transparente */
+font-size: 15px;
+color: rgba(224, 224, 224, 0.8);
+  /* Limite sa largeur pour éviter des lignes trop longues à lire */
+max-width: 450px;
+}
+
+
+.hero__cta {
+  /* Reprends le style "pilule" du bouton (padding + border-radius) */
+padding: 10px;
+margin-top: 10px;
+border-radius: 80px;
+  /* Couleur de fond vive (accent), texte clair */
+background-color: #e2725b;
+color: #e0e0e0;
+  /* Ajoute une ombre portée douce (box-shadow) pour le faire "flotter" */
+box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  /* Prépare une transition pour l'effet hover */
+  transition: 0.3s ease;
+}
+
+.hero__cta:hover {
+  /* Amplifie légèrement le bouton et décale-le vers le haut au survol
+     (transform: translateY + scale) */
+transform: translateY(-2px) scale(1.03);
+
+  /* Renforce l'ombre portée au survol */
+box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+}
+
+.hero__stamp {
+  /* Positionne ce tampon décoratif en absolu, dans un coin du hero */
+position: absolute;
+  /* Donne-lui une taille fixe (width/height) et une légère transparence (opacity) */
+  width: 80px;
+  height: 80px;
+  opacity: 0.8;
+  bottom: 60px;
+  right: 60px;
+}
+
+.hero__stamp-svg {
+  /* Fais en sorte que le SVG remplisse tout son conteneur (width/height: 100%) */
+width: 100%;
+height: 100%;
+
+  /* Ajoute une animation de rotation continue et lente (@keyframes spin) */
+  animation: spin 15s linear infinite;
+}
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+
+.hero__stamp-svg circle {
+  /* Cercle non rempli (fill: none), avec un simple contour clair (stroke) */
+  fill: none;
+  stroke: #e0e0e0;
+  stroke-width: 2;
+}
+
+.hero__stamp-svg text {
+  /* Petite taille de police, lettres espacées, couleur claire, majuscules */
+  font-size: 8px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  fill: #e0e0e0;
+}
+
+.hero__scroll {
+  /* Positionne cette flèche en bas, centrée horizontalement
+     (position: absolute + left: 50% + transform: translateX(-50%)) */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 20px;
+
+  /* Couleur claire et taille de police visible */
+   color: #e0e0e0;
+   font-size: 24px;
+  /* Ajoute une animation de "rebond" doux et continu (@keyframes bounce) */
+  animation: bounce 1.5s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-10px);
+  }
+}
+
+/* Rappel : tu dois créer toi-même les @keyframes utilisées ci-dessus
+   (une pour l'apparition du hero, une pour la rotation du tampon,
+   une pour le rebond de la flèche de scroll). Donne-leur les noms
+   que tu as utilisés dans les propriétés `animation` ci-dessus. */
+
+
+/* ============================================================
+   EN-TÊTES DE SECTION (réutilisés par destinations / témoignages / galerie)
+   ============================================================ */
+.section__header {
+  /* Limite la largeur (max-width), centre le bloc horizontalement (margin auto) */
+max-width: 800px;
+margin: auto;
+margin-bottom: 40px;
+  /* Centre le texte */
+text-align: center;
+  /* Empile eyebrow / titre / texte verticalement avec Flexbox + gap */
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.section__eyebrow {
+  /* Même traitement typographique que .hero__eyebrow, mais dans ta
+     couleur d'accent (pas forcément dorée ici) */
+font-size: 11px;
+text-transform: uppercase;
+letter-spacing: 1px;
+color: var(--coral);
+margin-top: 15px;
+}
+
+.section__title {
+  /* Police display, taille responsive avec clamp() */
+font-family: 'Times New Roman', Times, serif;
+font-size: clamp(30px, 5vw, 50px);
+}
+
+.section__text {
+  /* Couleur de texte légèrement atténuée (utilise rgba ou une variable) */
+  color: rgba(16, 36, 46, 0.7);
+}
+
+.section__header--light .section__title,
+.section__header--light .section__text {
+  /* Variante pour fond sombre (section témoignages) : passe le texte en clair */
+  color: #e0e0e0;
+}
+
+.section__header--light .section__eyebrow {
+  /* Adapte aussi la couleur de l'eyebrow sur fond sombre */
+  color: var(--gold);
+}
+
+/* ============================================================
+   DESTINATIONS — Grid de cartes
+   Objectif : une grille de cartes responsive, sans media query,
+   grâce à repeat(auto-fit, minmax(...)).
+   ============================================================ */
+.destinations {
+  /* Padding généreux haut/bas, limite la largeur totale et centre (margin auto) */
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 25px;
+  padding-right: 25px;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.destinations__grid {
+  /* display: grid */
+display: grid;
+  /* grid-template-columns avec repeat(auto-fit, minmax(260px, 1fr)) */
+grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  /* Espacement entre les cartes (gap) */
+gap: 20px;
+}
+
+.destination-card {
+  /* Fond clair, coins arrondis, ombre portée douce */
+background-color: var(--cream);
+border-radius: var(--radius-md);
+box-shadow: var(--shadow-card);
+  /* overflow: hidden pour que l'image respecte les coins arrondis */
+overflow: hidden;
+  /* Prépare une transition sur transform et box-shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.destination-card:hover {
+  /* Soulève légèrement la carte (translateY négatif) */
+transform: translateY(-5px);
+  /* Renforce l'ombre portée */
+box-shadow: 0 15px 30px rgba(16, 36, 46, 0.3);
+}
+
+.destination-card__image {
+  /* Hauteur fixe, image de fond qui couvre tout l'espace */
+height: 200px;
+background-size: cover;
+background-position: center;
+  /* position: relative (pour placer le tag "Nouveau" / "Populaire" dessus) */
+position: relative;
+  /* Prépare une transition sur transform (zoom au survol) */
+  transition: transform 0.3s ease;
+}
+
+.destination-card:hover .destination-card__image {
+  /* Zoom léger sur l'image UNIQUEMENT quand on survole toute la carte */
+transform: scale(1.05);
+}
+
+.destination-card__tag {
+  /* Positionne cette étiquette en haut à gauche de l'image (absolute) */
+position: absolute;
+top: 15px;
+left: 15px;
+  /* Fond clair semi-opaque, texte foncé, coins très arrondis (pilule) */
+background-color: rgba(255, 255, 255, 0.8);
+color: var(--ink);
+border-radius: 80px;
+  /* Petite taille de police, majuscules, lettres espacées */
+  padding: 5px 10px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.destination-card__content {
+  /* Padding interne confortable */
+padding: 20px;
+  /* Empile les éléments (titre, lieu, description, footer) avec Flexbox column */
+display: flex;
+flex-direction: column;
+}
+
+.destination-card__title {
+  /* Police display, taille et poids marqués */
+font-family: 'Times New Roman', Times, serif;
+font-size: 20px;
+font-weight: bold;
+}
+
+.destination-card__location {
+  /* Petite taille, majuscules, lettres espacées, couleur d'accent doré */
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--gold);
+}
+
+.destination-card__desc {
+  /* Texte atténué, petite taille */
+  opacity: 0.8;
+  font-size: 13px;
+}
+
+.destination-card__footer {
+  /* Aligne le prix et le lien "Découvrir" sur une même ligne, aux extrémités
+     (Flexbox + justify-content: space-between) */
+display: flex;
+justify-content: space-between;
+margin-top: 10px;
+padding-top: 10px;
+  /* Ajoute une fine bordure supérieure pour séparer du reste de la carte */
+border-top: 1px solid rgba(16, 36, 46, 0.1);
+}
+
+.destination-card__price {
+  /* Texte en gras, bien visible */
+  font-weight: bold;
+}
+
+.destination-card__link {
+  /* Couleur d'accent, texte en gras */
+  color: var(--coral);
+  font-weight: bold;
+  /* Prépare une transition sur transform pour un léger déplacement au survol */
+  transition: transform 0.3s ease;
+}
+
+.destination-card__link:hover {
+  /* Déplace légèrement le texte vers la droite (translateX) */
+  transform: translateX(5px);
+}
+
+/* ============================================================
+   TÉMOIGNAGES — fond sombre pour rompre le rythme de la page
+   ============================================================ */
+.testimonials {
+  /* Fond sombre (ta couleur "teal" ou équivalente) */
+background-color: var(--teal);
+  /* Padding généreux haut/bas et gauche/droite */
+  padding: 60px 25px;
+  margin-top: 40px;
+}
+
+.testimonials__grid {
+  /* Limite la largeur, centre le bloc */
+max-width: 1200px;
+margin: 0 auto;
+  /* Utilise Flexbox avec flex-wrap pour que les cartes passent à la
+     ligne sur petit écran, et centre-les (justify-content) */
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+  /* Espacement entre les cartes */
+  gap: 20px;
+}
+
+.testimonial-card {
+  /* flex-basis autour de 300px avec possibilité de grandir/rétrécir
+     (flex: 1 1 300px) et une largeur maximale */
+flex: 1 1 300px;
+max-width: 400px;
+  /* Fond légèrement transparent + fine bordure claire semi-transparente */
+background-color: rgba(255, 255, 255, 0.087);
+border: 1px solid rgba(255, 255, 255, 0.212);
+  /* Coins arrondis, padding interne */
+border-radius: var(--radius-md);
+padding: 20px;
+  /* Empile citation + auteur avec Flexbox column et un espacement */
+display: flex;
+flex-direction: column;
+gap: 15px;
+  /* Prépare une transition douce pour l'effet hover */
+  transition: 0.3s ease;
+}
+
+.testimonial-card:hover {
+  /* Éclaircis très légèrement le fond et soulève un peu la carte */
+  background-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-5px);
+}
+
+.testimonial-card__quote {
+  /* Police display, taille confortable, style italique */
+display: flex;
+font-family: var(--font-display);
+font-size: 18px;
+font-style: italic;
+  /* Couleur claire (on est sur fond sombre) */
+color: #e0e0e0;
+}
+
+.testimonial-card__author {
+  /* Aligne l'avatar et le bloc nom/rôle sur une ligne avec Flexbox + gap */
+  display: flex;
+  justify-content: flex-start;
+  gap: 15px;
+}
+
+.testimonial-card__avatar {
+  /* Transforme l'image en cercle parfait (width = height + border-radius: 50%) */
+width: 50px;
+height: 50px;
+border-radius: 50%;
+  /* object-fit: cover pour éviter toute déformation */
+object-fit: cover;
+  /* Ajoute une fine bordure dorée autour de l'avatar */
+border: 1.3px solid var(--gold);
+}
+
+.testimonial-card__name {
+  /* Couleur claire, poids de police marqué */
+  color: #e0e0e0;
+  font-weight: bold;
+}
+
+.testimonial-card__role {
+  /* Couleur claire mais atténuée, petite taille */
+  color: rgba(224, 224, 224, 0.7);
+  font-size: 14px;
+}
+
+/* ============================================================
+   GALERIE — Mosaïque d'images de tailles variées
+   ============================================================ */
+.gallery {
+  /* Padding généreux, largeur limitée et centrée */
+  padding: 40px 25px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.gallery__grid {
+  /* display: grid avec 4 colonnes égales (repeat(4, 1fr)) */
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  /* Une hauteur de ligne fixe pour toutes les rangées (grid-auto-rows) */
+  grid-auto-rows: 200px;
+  /* Espacement entre les vignettes */
+  gap: 15px;
+}
+
+.gallery__item {
+  /* Coins légèrement arrondis */
+border-radius: var(--radius-sm);
+  /* overflow: hidden pour que l'image respecte les coins arrondis */
+  overflow: hidden;
+}
+
+.gallery__item img {
+  /* L'image doit remplir tout l'espace de la vignette sans se déformer
+     (width/height: 100% + object-fit: cover) */
+width: 100%;
+height: 100%;
+object-fit: cover;
+  /* Prépare une transition sur transform et filter, pour l'effet hover */
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.gallery__item:hover img {
+  /* Zoom léger sur l'image au survol */
+transform: scale(1.05);
+  /* Bonus : légère augmentation de la luminosité (filter: brightness) */
+  filter: brightness(1.1);
+}
+
+.gallery__item--big {
+  /* Cette vignette occupe 2 colonnes ET 2 lignes dans la grille
+     (grid-column: span 2 + grid-row: span 2) */
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.gallery__item--tall {
+  /* Cette vignette occupe 2 lignes seulement (grid-row: span 2) */
+  grid-row: span 2;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer {
+  /* Fond très sombre, texte clair */
+background-color: var(--ink);
+color: #e0e0e0;
+  /* Padding généreux, un peu plus important en haut qu'en bas */
+  padding: 60px 40px 30px 40px;
+  margin-top: 40px;
+}
+
+.footer__top {
+  /* Largeur limitée et centrée */
+max-width: 1200px;
+margin: 0 auto;
+padding-bottom: 40px;
+  /* Flexbox : aligne le bloc marque et le bloc newsletter, avec
+     retour à la ligne possible (flex-wrap) et espacement aux extrémités */
+display: flex;
+flex-wrap: wrap;
+justify-content: space-between;
+  /* Une fine bordure inférieure pour séparer du reste du footer */
+  border-bottom: 1px solid rgba(224, 224, 224, 0.2);
+}
+
+.footer__logo {
+  /* Police display, grande taille */
+  display: flex;
+  font-family: var(--font-display);
+  font-size: 24px;
+}
+
+.footer__tagline {
+  /* Couleur claire atténuée */
+  color: rgba(224, 224, 224, 0.7);
+}
+
+.footer__newsletter-label {
+  /* display: block, petite marge sous le label */
+  display: block;
+  margin-bottom: 5px;
+}
+
+.footer__newsletter-row {
+  /* Aligne le champ email et le bouton sur une ligne avec Flexbox + gap */
+  display: flex;
+  gap: 10px;
+}
+
+.footer__newsletter-row input {
+  /* Padding confortable, coins très arrondis (pilule) */
+padding: 10px;
+border-radius: 80px;
+  /* Bordure claire semi-transparente, fond transparent, texte clair */
+border: 1px solid rgba(224, 224, 224, 0.5);
+background-color: transparent;
+color: #e0e0e0;
+  /* Largeur minimale confortable (min-width) */
+  min-width: 200px;
+}
+
+.footer__newsletter-row button {
+  /* Même forme "pilule" que le champ input */
+padding: 10px 20px;
+border-radius: 80px;
+border: 1px solid rgba(224, 224, 224, 0.5);
+  /* Fond vif (accent), texte clair, curseur pointer */
+background-color: var(--coral);
+color: #e0e0e0;
+cursor: pointer;
+  /* Prépare une transition sur background-color */
+  transition: background-color 0.3s ease;
+}
+
+.footer__newsletter-row button:hover {
+  /* Change la couleur de fond au survol */
+  background-color: var(--coral-dark);
+}
+
+.footer__columns {
+  /* Largeur limitée et centrée */
+max-width: 1200px;
+margin: 40px auto 0 auto;
+  /* display: grid avec 4 colonnes égales */
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+  /* Espacement entre les colonnes */
+gap: 20px;
+}
+
+.footer__col h4 {
+  /* Petite taille, marge sous le titre, couleur d'accent doré */
+  display: block;
+  font-size: 14px;
+  margin-bottom: 10px;
+  color: var(--gold);
+}
+
+.footer__col ul {
+  /* Empile les liens verticalement avec un espacement régulier (Flexbox column + gap) */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer__col a {
+  /* Couleur claire atténuée, petite taille */
+color: rgba(224, 224, 224, 0.7);
+display: block;
+font-size: 14px;
+  /* Prépare une transition de couleur pour le survol */
+  transition: color 0.3s ease;
+}
+
+.footer__col a:hover {
+  /* Éclaircis la couleur du lien au survol */
+  color: #e0e0e0;
+}
+
+.footer__bottom {
+  /* Largeur limitée et centrée */
+max-width: 1200px;
+margin: 40px auto 0 auto;
+  /* Flexbox avec justify-content: space-between et flex-wrap */
+display: flex;
+justify-content: space-between;
+flex-wrap: wrap;
+  /* Petite taille de police, couleur bien atténuée */
+  font-size: 12px;
+  color: rgba(224, 224, 224, 0.5);
+}
+
+.footer__legal {
+  /* Aligne les deux liens légaux sur une ligne avec un espacement (Flexbox + gap) */
+  display: flex;
+  gap: 15px;
+}
+
+/* ============================================================
+   RESPONSIVE
+   Objectif : adapte la mise en page à la tablette (~900px) puis
+   au mobile (~560px) grâce à des media queries.
+   ============================================================ */
+@media (max-width: 900px) {
+  /* Réduis le padding horizontal de la navbar */
+  .navbar {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  /* Cache le menu de liens .navbar__links (display: none) —
+     on ne gère pas le menu burger dans cet exercice */
+  .navbar__links {
+    display: none;
+  }
+  /* Réduis le padding horizontal de .destinations, .testimonials,
+     .gallery et .footer */
+  .destinations, .testimonials, .gallery, .footer {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  /* Passe .gallery__grid à 2 colonnes au lieu de 4 */
+  .gallery__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  /* Adapte .gallery__item--big pour qu'elle n'occupe plus qu'une
+     seule ligne (grid-row: span 1) sur cette largeur d'écran */
+  .gallery__item--big {
+    grid-row: span 1;
+  }
+  /* Passe .footer__columns à 2 colonnes au lieu de 4 */
+  .footer__columns {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+@media (max-width: 560px) {
+  /* Cache complètement le tampon décoratif du hero (display: none) */
+  .hero__stamp {
+    display: none;
+  }
+  /* Empile .footer__top en colonne (flex-direction: column) */
+  .footer__top {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  /* Passe .footer__columns à une seule colonne */
+  .footer__columns {
+    grid-template-columns: 1fr;
+  }
+  /* Empile .footer__bottom en colonne également */
+  .footer__bottom {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
